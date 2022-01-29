@@ -18,7 +18,7 @@ class settingService {
           updateAt: true,
         },
       });
-      if (data.password !== undefined) {
+      if (data.password !== undefined || data.password === null || data.password === '' || data.password === "") {
         const updateUser = await prisma.user.update({
           where: {
             id: idUser,
