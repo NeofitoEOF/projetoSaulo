@@ -6,7 +6,6 @@ const jwt = require("jsonwebtoken");
 class settingService {
   async updateAccount(idUser, data) {
     try {
-      const encryptedPassword = await bcrypt.hash(String(data?.password), 10);
       const updateUser = await prisma.user.update({
         where: {
           id: idUser,
@@ -18,7 +17,14 @@ class settingService {
           updateAt: true,
         },
       });
-      if (data.password !== undefined || data.password === null || data.password === '' || data.password === "") {
+      if (
+        data.password === String(null) ||
+        data.password === "" ||
+        data.password === ""
+      )
+        throw new Error("Não e possivel salvar senha em branca!");
+      if (data.password !== undefined) {
+        const encryptedPassword = await bcrypt.hash(String(data?.password), 10);
         const updateUser = await prisma.user.update({
           where: {
             id: idUser,
