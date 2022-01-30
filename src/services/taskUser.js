@@ -9,6 +9,8 @@ class taskRegister {
           userId: id,
           name: String(data.name),
           description: String(data.description),
+          nameTag: data?.nameTag,
+          timeDuration: data?.timeDuration
         },
         select: {
           name: true,
