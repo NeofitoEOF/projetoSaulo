@@ -20,23 +20,23 @@ model User {
 }
 
 model Task {
-  id          String      @id @default(cuid())
-  name        String
-  description String
-  nameTag         String
-  timeDuration String
-  user        User        @relation(fields: [userId], references: [id])
-  userId      String
-  taskXTags   TaskXTags[]
-  createdAt   DateTime    @default(now())
-  updateAt    DateTime    @default(now())
+  id           String      @id @default(cuid())
+  name         String
+  description  String?
+  nameTag      String?
+  timeDuration DateTime?
+  user         User        @relation(fields: [userId], references: [id])
+  userId       String
+  taskXTags    TaskXTags[]
+  createdAt    DateTime    @default(now())
+  updateAt     DateTime    @default(now())
 
 }
 
 model Tags {
   id        String      @id @default(cuid())
   name      String
-  color     String
+  color     String?
   user      User        @relation(fields: [userTagId], references: [id])
   userTagId String
   taskXTags TaskXTags[]
